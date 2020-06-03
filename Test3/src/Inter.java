@@ -3,6 +3,7 @@ import java.awt.Canvas;
 import java.awt.Checkbox;
 import java.awt.Color;
 import java.awt.Frame;
+import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,14 +13,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-
-
 public class Inter {
-	static TextField serch, tf;
+	static TextField serch;
 	static Button button;
 	static Frame f;
 	static private String input;
 	static KDAO kd;
+	static TextArea tf;
 
 	public static String getInput() {
 		return input;
@@ -59,26 +59,29 @@ public class Inter {
 				if (serch.getText().length() == 1) {
 					setInput("KSound ='" + serch.getText());
 				}
-				if (serch.getText().length() >= 2) {
+				if (serch.getText().length() >= 1) {
 					setInput("KMean ='" + serch.getText());
 				}
 				if (serch.getText().length() == 0) {
 					serch.setText("찾으려는 한자의 음독이나 훈독을 입력해 주세요.");
 				}
-			
+
 				ArrayList<KVO> list = kd.list(Inter.getInput());
-				
-				for(int i=0;i<list.size();i++) {
-					KVO data=(KVO)list.get(i);
-					int No=data.getNo();
-					String KMean=data.getKMean();
-					String KSound=data.getKSound();
-					tf.setText(kd.list(KSound).toString()+kd.list(KMean).toString());
-					System.out.println(No+" : "+KMean+" : "+KSound);
+
+				for (int i = 0; i < list.size(); i++) {
+					KVO data = (KVO) list.get(i);
+					int No = data.getNo();
+					String KMean = data.getKMean();
+					String KSound = data.getKSound();
+					
+					
+					String A;
+					String B = tf.getText();
+					System.out.println(B);
+					A = "\t" + KMean + "\t" + KSound;
+					tf.setText(A + "\n" + B);
 				}
-				
-				
-				
+
 			}
 		});
 
@@ -87,11 +90,9 @@ public class Inter {
 		kanji.setBounds(300, 160, 150, 150);
 		f.add(kanji);
 
-		TextField tf = new TextField();
-		f.add(tf);
+		tf = new TextArea();
 		tf.setBounds(80, 160, 150, 150);
-		
-		
+		f.add(tf);
 
 		tf.setVisible(true);
 
