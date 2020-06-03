@@ -59,7 +59,7 @@ public class Inter {
 				if (serch.getText().length() == 1) {
 					setInput("KSound ='" + serch.getText());
 				}
-				if (serch.getText().length() >= 1) {
+				if (serch.getText().length() >= 2) {
 					setInput("KMean ='" + serch.getText());
 				}
 				if (serch.getText().length() == 0) {
@@ -67,18 +67,18 @@ public class Inter {
 				}
 
 				ArrayList<KVO> list = kd.list(Inter.getInput());
-
+				tf.setText("");//텍스트 에어리어 화면 초기화
+				
 				for (int i = 0; i < list.size(); i++) {
 					KVO data = (KVO) list.get(i);
 					int No = data.getNo();
 					String KMean = data.getKMean();
 					String KSound = data.getKSound();
 					
-					
+					//텍스트에어리어 영역에 출력
 					String A;
-					String B = tf.getText();
-					System.out.println(B);
-					A = "\t" + KMean + "\t" + KSound;
+					String B = tf.getText();					
+					A = KMean + "\t" + KSound;
 					tf.setText(A + "\n" + B);
 				}
 
