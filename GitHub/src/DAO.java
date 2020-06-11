@@ -3,10 +3,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class DAO {
@@ -14,8 +10,11 @@ public class DAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 
-	DefaultTableModel model = new DefaultTableModel(new String[] { "훈독", "음독", "훈독", "음독", "한자" }, 0);
-
+	DefaultTableModel model = new DefaultTableModel(new String[] { "훈 독", "음 독", "훈 독", " 음 독","한자" }, 0) {
+		public boolean isCellEditable(int i, int c){ return false; }
+	};
+	
+	
 	public DefaultTableModel getModel() {
 		return model;
 	}
@@ -62,9 +61,9 @@ public class DAO {
 				}
 
 				Object data[] = { Kmean, Ksound, Jmean, Jsound, Hanja, no };
-
+				
 				model.addRow(data);
-
+				
 			}
 		} catch (Exception e) {
 //			System.out.println("select 오류 " + e);
@@ -90,8 +89,8 @@ public class DAO {
 				String Ksound = rs.getString("Ksound");
 				String no = rs.getString("no");
 				String Jsound = rs.getString("Jsound");
-				String Jmean = rs.getNString("Jmean");
-				String Hanja = rs.getNString("Hanja");
+				String Jmean = rs.getString("Jmean");
+				String Hanja = rs.getString("Hanja");
 
 				if (Jsound == null) {
 					Jsound = " ";
@@ -102,7 +101,6 @@ public class DAO {
 
 				Object data[] = { Kmean, Ksound, Jmean, Jsound, Hanja, no };
 				model.addRow(data);
-				System.out.println(Kmean + ", " + Ksound + ", " + Jmean + ", " + Jsound + ", " + Hanja + ", " + no);
 
 			}
 		} catch (Exception e) {
@@ -128,8 +126,8 @@ public class DAO {
 				String Ksound = rs.getString("Ksound");
 				String no = rs.getString("no");
 				String Jsound = rs.getString("Jsound");
-				String Jmean = rs.getNString("Jmean");
-				String Hanja = rs.getNString("Hanja");
+				String Jmean = rs.getString("Jmean");
+				String Hanja = rs.getString("Hanja");
 
 				if (Jsound == null) {
 					Jsound = " ";
@@ -141,7 +139,6 @@ public class DAO {
 				Object data[] = { Jmean, Jsound, Kmean, Ksound, Hanja, no };
 
 				model.addRow(data);
-				System.out.println(Kmean + ", " + Ksound + ", " + Jmean + ", " + Jsound + ", " + Hanja + ", " + no);
 
 			}
 		} catch (Exception e) {
@@ -167,8 +164,8 @@ public class DAO {
 				String Ksound = rs.getString("Ksound");
 				String no = rs.getString("no");
 				String Jsound = rs.getString("Jsound");
-				String Jmean = rs.getNString("Jmean");
-				String Hanja = rs.getNString("Hanja");
+				String Jmean = rs.getString("Jmean");
+				String Hanja = rs.getString("Hanja");
 
 				if (Jsound == null) {
 					Jsound = " ";
@@ -179,7 +176,6 @@ public class DAO {
 
 				Object data[] = { Jmean, Jsound, Kmean, Ksound, Hanja, no };
 				model.addRow(data);
-				System.out.println(Kmean + ", " + Ksound + ", " + Jmean + ", " + Jsound + ", " + Hanja + ", " + no);
 
 			}
 		} catch (Exception e) {

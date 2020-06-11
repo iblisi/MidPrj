@@ -3,11 +3,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -28,14 +26,13 @@ public class Dictionary {
 
 	String[] slist = new String[50];
 	Object ob[][] = new Object[0][5];
-//	String str[] = { "훈독", "음독", "日-훈독", "日-음독", "한자" };
 
 	DAO dao;
 
 	public Dictionary() {
-		
+
 		dao = new DAO();
-		
+
 		for (int i = 0; i < 50; i++) {
 			slist[i] = "";
 		}
@@ -79,7 +76,7 @@ public class Dictionary {
 		jp.setBounds(476, 31, 64, 23);
 		f.getContentPane().add(jp);
 		jp.setOpaque(false);
-		
+
 		sel = new Choice();
 		sel.setBounds(30, 71, 64, 13);
 
@@ -90,16 +87,32 @@ public class Dictionary {
 
 		f.setVisible(true);
 
+		
+	   
 //		model = new DefaultTableModel(ob, str);
 		model = dao.model;
 		table = new JTable(model);
 		jsp = new JScrollPane(table);
 		jsp.setBounds(30, 130, 350, 200);
 		f.getContentPane().add(jsp);
+		table.getColumnModel().getColumn(4).setMinWidth(0);
+		table.getColumnModel().getColumn(4).setMaxWidth(0);
+		table.getColumn("음 독").setPreferredWidth(40);
+		table.getColumn(" 음 독").setPreferredWidth(40);
 
+		
 		f.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
+			}
+		});
+
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				int sel = table.getSelectedRow();
+				String result_name = (String) table.getValueAt(sel, 4);
+				int sel2 = table.getSelectedColumn();
+				System.out.println(result_name);
 			}
 		});
 
@@ -120,12 +133,12 @@ public class Dictionary {
 						model.setNumRows(0);
 						dao.selectKs(search.getText());
 						model = dao.getModel();
-
+						getHanja();
 					} else if (sel.getSelectedIndex() == 2) {
 						model.setNumRows(0);
 						dao.selectKm(search.getText());
 						model = dao.getModel();
-
+						getHanja();
 					} else {
 						search.setText("선택 사항을 선택 해주세요.");
 					}
@@ -134,12 +147,12 @@ public class Dictionary {
 						model.setNumRows(0);
 						dao.selectJs(search.getText());
 						model = dao.getModel();
-
+						getHanja();
 					} else if (sel.getSelectedIndex() == 2) {
 						model.setNumRows(0);
 						dao.selectJm(search.getText());
 						model = dao.getModel();
-
+						getHanja();
 					} else {
 						search.setText("선택 사항을 선택 해주세요.");
 					}
@@ -151,7 +164,14 @@ public class Dictionary {
 
 	}
 
+	public void getHanja() {
+		table.getColumn("한자").setWidth(0);
+		table.getColumn("한자").setMinWidth(0);
+		table.getColumn("한자").setMaxWidth(0);
+	}
+
 	public static void main(String[] args) {
 		new Dictionary();
 	}
+
 }
