@@ -11,14 +11,15 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.Color;
+import java.awt.Font;
 
 public class Dictionary {
 	JFrame f;
 	JCheckBox kor, jp;
-	private JTextField search, list;
+	private JTextField search, list, hanja;
 	JButton button;
 	Choice sel;
-
+	
 	private JTable table;
 	JLabel listname;
 	DefaultTableModel model;
@@ -28,6 +29,8 @@ public class Dictionary {
 	Object ob[][] = new Object[0][5];
 
 	DAO dao;
+	
+	
 
 	public Dictionary() {
 
@@ -79,27 +82,33 @@ public class Dictionary {
 
 		sel = new Choice();
 		sel.setBounds(30, 71, 64, 13);
-
+		
 		sel.add(" 선  택 ");
 		sel.add(" 음  독 ");
 		sel.add(" 훈  독 ");
 		f.getContentPane().add(sel);
-
-		f.setVisible(true);
-
-		
-	   
+   
 //		model = new DefaultTableModel(ob, str);
 		model = dao.model;
 		table = new JTable(model);
 		jsp = new JScrollPane(table);
 		jsp.setBounds(30, 130, 350, 200);
 		f.getContentPane().add(jsp);
+		
+		
+		
 		table.getColumnModel().getColumn(4).setMinWidth(0);
 		table.getColumnModel().getColumn(4).setMaxWidth(0);
 		table.getColumn("음 독").setPreferredWidth(40);
 		table.getColumn(" 음 독").setPreferredWidth(40);
-
+	
+		hanja = new JTextField();
+		hanja.setBounds(395, 130, 150, 200);
+		f.getContentPane().add(hanja);
+		hanja.setColumns(10);
+		hanja.setEditable(false);
+		
+		f.setVisible(true);
 		
 		f.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -110,9 +119,9 @@ public class Dictionary {
 		table.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int sel = table.getSelectedRow();
-				String result_name = (String) table.getValueAt(sel, 4);
-				int sel2 = table.getSelectedColumn();
-				System.out.println(result_name);
+			    String result_han = (String) table.getValueAt(sel, 4);	
+				hanja.setText(result_han);
+				hanja.setFont(new Font("", Font.PLAIN, 150));
 			}
 		});
 
@@ -173,5 +182,4 @@ public class Dictionary {
 	public static void main(String[] args) {
 		new Dictionary();
 	}
-
 }
