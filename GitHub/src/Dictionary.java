@@ -71,11 +71,7 @@ public class Dictionary {
 		f.getContentPane().add(search);
 		search.setColumns(10);
 		search.setOpaque(false);
-		search.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				search.setText("");
-			}
-		});
+		
 
 		list = new JTextField();
 		list.setBounds(338, 390, 200, 21);
@@ -111,12 +107,15 @@ public class Dictionary {
 		table = new JTable(model);
 		jsp = new JScrollPane(table);
 		jsp.setBounds(30, 130, 350, 200);
+		jsp.setOpaque(false);
+		jsp.getViewport().setOpaque(false);
 		f.getContentPane().add(jsp);
 
 		table.getColumnModel().getColumn(4).setMinWidth(0);
 		table.getColumnModel().getColumn(4).setMaxWidth(0);
 		table.getColumn("음 독").setPreferredWidth(40);
 		table.getColumn(" 음 독").setPreferredWidth(40);
+		
 
 		hanja = new JTextField() {
 			public void setBorder(Border border) {
@@ -161,10 +160,15 @@ public class Dictionary {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				select();
-
 			}
-
 		});
+		
+		search.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				search.setText("");
+			}
+		});
+		
 		search.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
@@ -172,6 +176,7 @@ public class Dictionary {
 				}
 			}
 		});
+		
 
 	}
 
