@@ -27,10 +27,11 @@ public class GDAO {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 			con = DriverManager.getConnection(url, "kosea", "kosea2019a");
-			System.out.println("立加" + con);
+//			System.out.println("立加" + con);
 
 		} catch (Exception e) {
-			System.out.println("DB立加坷幅 " + e);
+//			System.out.println("DB立加坷幅 " + e);
+			e.getStackTrace();
 		}
 	}
 
@@ -50,14 +51,14 @@ public class GDAO {
 
 			int result = (int) ((Math.random() * max) + 1);
 			Random = String.valueOf(result);
-			System.out.println(Random);
+//			System.out.println(Random);
 
 			sql = "SELECT * FROM HANJA WHERE  Hanja.No ='" + Random + "'";
 
 			pstmt = con.prepareStatement(sql);
-			System.out.println("pstmt : " + pstmt);
+//			System.out.println("pstmt : " + pstmt);
 			rs = pstmt.executeQuery();
-			System.out.println("rs : " + rs);
+//			System.out.println("rs : " + rs);
 
 			while (rs.next()) {
 				String Hanja = rs.getString("Hanja");
@@ -76,9 +77,9 @@ public class GDAO {
 		try {
 			String sql = "SELECT * FROM JAPANKANJI WHERE JAPANKANJI.NO ='" + Random + "'";
 			pstmt = con.prepareStatement(sql);
-			System.out.println("pstmt : " + pstmt);
+//			System.out.println("pstmt : " + pstmt);
 			rs = pstmt.executeQuery();
-			System.out.println("rs : " + rs);
+//			System.out.println("rs : " + rs);
 
 			while (rs.next()) {
 				String Jsound = rs.getString("Jsound");
@@ -108,9 +109,9 @@ public class GDAO {
 		try {
 			String sql = "SELECT * FROM  KOREAKANJI WHERE KOREAKANJI.NO  ='" + Random + "'";
 			pstmt = con.prepareStatement(sql);
-			System.out.println("pstmt : " + pstmt);
+//			System.out.println("pstmt : " + pstmt);
 			rs = pstmt.executeQuery();
-			System.out.println("rs : " + rs);
+//			System.out.println("rs : " + rs);
 
 			while (rs.next()) {
 				String Ksound = rs.getString("Ksound");

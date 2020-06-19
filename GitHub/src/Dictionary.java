@@ -12,8 +12,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -29,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 // sql로더를 이용해서 데이터 베이스에 한자가 깨지지 않고 입력가능한지 확인
 
 public class Dictionary {
-	JFrame f;
+	public JFrame f;
 	JCheckBox kor, jp;
 	private JTextField search, list, hanja;
 	JButton button;
@@ -47,10 +45,12 @@ public class Dictionary {
 
 	Image img = new ImageIcon("C:\\Users\\inisu\\Desktop\\배경2.jpg").getImage();
 	private JLabel bgi;
+	private JButton Game;
 
 	public Dictionary() {
 
 		dao = new DAO();
+		
 
 		for (int i = 0; i < 50; i++) {
 			slist[i] = "";
@@ -71,7 +71,6 @@ public class Dictionary {
 		f.getContentPane().add(search);
 		search.setColumns(10);
 		search.setOpaque(false);
-		
 
 		list = new JTextField();
 		list.setBounds(338, 390, 200, 21);
@@ -115,7 +114,6 @@ public class Dictionary {
 		table.getColumnModel().getColumn(4).setMaxWidth(0);
 		table.getColumn("음 독").setPreferredWidth(40);
 		table.getColumn(" 음 독").setPreferredWidth(40);
-		
 
 		hanja = new JTextField() {
 			public void setBorder(Border border) {
@@ -140,11 +138,22 @@ public class Dictionary {
 		bgi.setBounds(0, 0, 584, 461);
 		f.getContentPane().add(bgi);
 
+		Game = new JButton("Game");
+		Game.setBounds(30, 31, 97, 23);
+		f.getContentPane().add(Game);
+
 		f.setVisible(true);
 
+		Game.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				f.hide();
+				
+			}
+		});
 		f.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
+				
 			}
 		});
 
@@ -162,21 +171,20 @@ public class Dictionary {
 				select();
 			}
 		});
-		
+
 		search.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				search.setText("");
 			}
 		});
-		
+
 		search.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					select();
 				}
 			}
 		});
-		
 
 	}
 
