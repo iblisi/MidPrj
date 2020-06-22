@@ -1,4 +1,4 @@
-package Game;
+
 
 import java.awt.Dialog;
 import java.awt.Font;
@@ -39,9 +39,7 @@ public class Game extends JFrame {
 	Image img = new ImageIcon("C:\\Users\\inisu\\Desktop\\πË∞Ê2.jpg").getImage();
 
 	public Game() {
-		
-		
-
+	
 		gda = new GDAO();
 
 		f2 = new JFrame("«—¿⁄∞‘¿”");
@@ -51,46 +49,48 @@ public class Game extends JFrame {
 			public void setBorder(Border border) {
 			}
 		};
-		problem.setBounds(68, 75, 242, 147);
+		problem.setBounds(51, 73, 316, 219);
 		f2.getContentPane().add(problem);
 		problem.setColumns(10);
 		problem.setEditable(false);
 		problem.setOpaque(false);
 
 		enser = new JTextField();
-		enser.setBounds(55, 388, 278, 21);
+		enser.setBounds(68, 582, 316, 21);
 		f2.getContentPane().add(enser);
 		enser.setColumns(10);
 
 		check = new JComboBox<String>();
 		check.addItem("«—±πæÓ");
 		check.addItem("ÏÌ‹‚Âﬁ");
-		check.setBounds(309, 10, 63, 23);
+		check.setBounds(394, 10, 63, 23);
 		f2.getContentPane().add(check);
 
 		set = new JButton("Start");
-		set.setBounds(126, 290, 118, 35);
+		set.setBounds(133, 355, 167, 61);
+		set.setFont(new Font("", Font.PLAIN, 25));
 		f2.getContentPane().add(set);
 
 		imageLabel = new JLabel("");
 
 		hint = new JButton("Hint!");
-		hint.setBounds(136, 335, 97, 23);
+		hint.setBounds(154, 446, 123, 43);
+		hint.setFont(new Font("", Font.PLAIN, 20));
 		f2.getContentPane().add(hint);
 
-		f2.setSize(400, 480);
+		f2.setBounds(1210, 200, 485, 689);
 
 		hintField = new JTextField() {
 			public void setBorder(Border border) {
 			}
 		};
 		hintField.setHorizontalAlignment(JTextField.CENTER);
-		hintField.setBounds(12, 232, 360, 35);
+		hintField.setBounds(40, 302, 360, 43);
 		f2.getContentPane().add(hintField);
 		hintField.setColumns(10);
 		hintField.setOpaque(false);
 		hintField.setEditable(false);
-
+		hintField.setFont(new Font("", Font.PLAIN, 20));
 		JLabel bgi2 = new JLabel("") {
 			{
 				setOpaque(false);
@@ -101,15 +101,13 @@ public class Game extends JFrame {
 				super.paintComponent(g);
 			}
 		};
-		bgi2.setBounds(0, 0, 384, 441);
+		bgi2.setBounds(0, 0, 469, 650);
 		f2.getContentPane().add(bgi2);
 		hintField.hide();
 
 		f2.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				f2.dispose();
-				
-				
 			}
 		});
 
@@ -213,7 +211,7 @@ public class Game extends JFrame {
 
 		String result = gda.start();
 		problem.setText(" " + result);
-		problem.setFont(new Font("", Font.PLAIN, 150));
+		problem.setFont(new Font("", Font.PLAIN, 220));
 		enser.setText("");
 	}
 

@@ -1,4 +1,4 @@
-package Game;
+
 
 public class GVO {
 private String Jmean;

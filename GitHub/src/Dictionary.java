@@ -59,43 +59,47 @@ public class Dictionary {
 
 		f = new JFrame("dictionary");
 		f.getContentPane().setBackground(Color.white);
-		f.setBounds(30, 50, 600, 500);
+		f.setBounds(330, 200, 885, 689);
 		f.getContentPane().setLayout(null);
 
 		button = new JButton("검색");
 		button.setSize(20, 40);
-		button.setBounds(476, 71, 60, 23);
+		button.setBounds(734, 71, 76, 33);
 		f.getContentPane().add(button);
 
 		search = new JTextField(" 검색 할 한자를 적어주세요");
-		search.setBounds(100, 71, 364, 23);
+		search.setBounds(187, 71, 476, 33);
 		f.getContentPane().add(search);
 		search.setColumns(10);
 		search.setOpaque(false);
 
 		list = new JTextField();
-		list.setBounds(338, 390, 200, 21);
+		list.setBounds(476, 525, 334, 33);
 		f.getContentPane().add(list);
 		list.setColumns(10);
 		list.setEditable(false);
 		list.setOpaque(false);
+		list.setFont(new Font("", Font.BOLD, 20));
+		list.setForeground(Color.WHITE);
 
 		listname = new JLabel("검색 한 단어");
-		listname.setBounds(260, 390, 76, 23);
+		listname.setBounds(336, 524, 128, 34);
+		listname.setFont(new Font("", Font.BOLD, 20));
+//		listname.setForeground(Color.WHITE);
 		f.getContentPane().add(listname);
 
 		kor = new JCheckBox(" 한국어", true);
-		kor.setBounds(403, 31, 65, 23);
+		kor.setBounds(694, 31, 65, 23);
 		f.getContentPane().add(kor);
 		kor.setOpaque(false);
 
 		jp = new JCheckBox(" 일본어");
-		jp.setBounds(476, 31, 64, 23);
+		jp.setBounds(772, 31, 97, 23);
 		f.getContentPane().add(jp);
 		jp.setOpaque(false);
 
 		sel = new Choice();
-		sel.setBounds(30, 71, 64, 13);
+		sel.setBounds(39, 71, 97, 33);
 
 		sel.add(" 선  택 ");
 		sel.add(" 음  독 ");
@@ -106,7 +110,7 @@ public class Dictionary {
 		model = dao.model;
 		table = new JTable(model);
 		jsp = new JScrollPane(table);
-		jsp.setBounds(30, 130, 350, 200);
+		jsp.setBounds(39, 142, 497, 285);
 		jsp.setOpaque(false);
 		jsp.getViewport().setOpaque(false);
 		f.getContentPane().add(jsp);
@@ -121,7 +125,7 @@ public class Dictionary {
 			}
 		};
 		hanja.setOpaque(false);
-		hanja.setBounds(395, 130, 150, 200);
+		hanja.setBounds(589, 142, 221, 285);
 		f.getContentPane().add(hanja);
 		hanja.setColumns(10);
 		hanja.setEditable(false);
@@ -136,18 +140,18 @@ public class Dictionary {
 				super.paintComponent(g);
 			}
 		};
-		bgi.setBounds(0, 0, 584, 461);
+		bgi.setBounds(0, 0, 869, 650);
 		f.getContentPane().add(bgi);
 
 		Game = new JButton("Game");
-		Game.setBounds(30, 31, 97, 23);
+		Game.setBounds(39, 31, 97, 23);
 		f.getContentPane().add(Game);
 
 		f.setVisible(true);
 
 		Game.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				f.hide();
+//				f.hide();
 				Game g =new Game();
 			}
 		});
@@ -163,7 +167,7 @@ public class Dictionary {
 				int sel = table.getSelectedRow();
 				String result_han = (String) table.getValueAt(sel, 4);
 				hanja.setText(result_han);
-				hanja.setFont(new Font("", Font.PLAIN, 150));
+				hanja.setFont(new Font("", Font.PLAIN, 220));
 			}
 		});
 
