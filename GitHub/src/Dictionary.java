@@ -42,6 +42,7 @@ public class Dictionary {
 	Object ob[][] = new Object[0][5];
 
 	DAO dao;
+	
 
 	Image img = new ImageIcon("C:\\Users\\inisu\\Desktop\\¹è°æ2.jpg").getImage();
 	private JLabel bgi;
@@ -147,7 +148,7 @@ public class Dictionary {
 		Game.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				f.hide();
-				
+				Game g =new Game();
 			}
 		});
 		f.addWindowListener(new WindowAdapter() {
