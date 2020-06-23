@@ -28,7 +28,7 @@ public class DAO {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 			con = DriverManager.getConnection(url, "kosea", "kosea2019a");
-			System.out.println("立加" + con);
+//			System.out.println("立加" + con);
 
 		} catch (Exception e) {
 			System.out.println("DB立加坷幅 " + e);
@@ -38,12 +38,14 @@ public class DAO {
 	public void selectKs(String ms) {
 		connect();
 		try {
-			String sql = "SELECT * FROM KOREAKANJI, JAPANKANJI, HANJA WHERE KOREAKANJI.NO =JAPANKANJI.NO "
-					+ "AND KOREAKANJI.NO = HANJA.NO AND KOREAKANJI.KSound ='" + ms + "'";
+
+			String sql = "SELECT * FROM JAPANKANJI, KOREAKANJI, HANJA WHERE KOREAKANJI.NO = JAPANKANJI.NO AND KOREAKANJI.NO = HANJA.NO "
+					+"AND ksound LIKE '%"+ms+"%'";
+			
 			pstmt = con.prepareStatement(sql);
-			System.out.println("pstmt : " + pstmt);
+//			System.out.println("pstmt : " + pstmt);
 			rs = pstmt.executeQuery();
-			System.out.println("rs : " + rs);
+//			System.out.println("rs : " + rs);
 
 			while (rs.next()) {
 				String Kmean = rs.getString("Kmean");
@@ -77,12 +79,12 @@ public class DAO {
 		connect();
 		try {
 
-			String sql = "SELECT * FROM KOREAKANJI, JAPANKANJI, HANJA WHERE KOREAKANJI.NO =JAPANKANJI.NO "
-					+ "AND KOREAKANJI.NO = HANJA.NO AND KOREAKANJI.Kmean ='" + ms + "'";
+			String sql = "SELECT * FROM JAPANKANJI, KOREAKANJI, HANJA WHERE KOREAKANJI.NO = JAPANKANJI.NO AND KOREAKANJI.NO = HANJA.NO "
+					+"AND kmean LIKE '%"+ms+"%'";
 			pstmt = con.prepareStatement(sql);
-			System.out.println("pstmt : " + pstmt);
+//			System.out.println("pstmt : " + pstmt);
 			rs = pstmt.executeQuery();
-			System.out.println("rs : " + rs);
+//			System.out.println("rs : " + rs);
 
 			while (rs.next()) {
 				String Kmean = rs.getString("Kmean");
@@ -111,11 +113,21 @@ public class DAO {
 
 	public void selectJs(String ms) {
 		connect();
-
+		String sql=null;
 		try {
 
-			String sql = "SELECT * FROM KOREAKANJI, JAPANKANJI, HANJA WHERE KOREAKANJI.NO =JAPANKANJI.NO "
-					+ "AND KOREAKANJI.NO = HANJA.NO AND JAPANKANJI.Jsound ='" + ms + "'";
+			if(ms.length()==1) {
+				sql = "SELECT * FROM JAPANKANJI LEFT OUTER JOIN KOREAKANJI USING (no) LEFT OUTER JOIN HANJA USING (no) "
+						+ "WHERE JSound = '"+ms+"' OR JSOUND like '%、"+ms+"、%' OR JSOUND like '%、"+ms+"' OR JSOUND like '"+ms+"、%'";
+			}else if(ms.length()==2){
+				sql = "SELECT * FROM JAPANKANJI LEFT OUTER JOIN KOREAKANJI USING (no) LEFT OUTER JOIN HANJA USING (no) "
+						+ "WHERE JSound = '"+ms+"' OR JSOUND like '%、"+ms+"、%' OR JSOUND like '%、"+ms+"' OR JSOUND like '"+ms+"、%'";
+
+			}else {
+				sql = "SELECT * FROM JAPANKANJI LEFT OUTER JOIN KOREAKANJI USING (no) LEFT OUTER JOIN HANJA USING (no) "
+						+ "WHERE JSound = '"+ms+"' OR JSOUND like '%、"+ms+"' OR jsound LIKE '%"+ms+"％'";
+			}
+
 			pstmt = con.prepareStatement(sql);
 			System.out.println("pstmt : " + pstmt);
 			rs = pstmt.executeQuery();
@@ -139,7 +151,7 @@ public class DAO {
 				Object data[] = { Jmean, Jsound, Kmean, Ksound, Hanja, no };
 
 				model.addRow(data);
-
+				
 			}
 		} catch (Exception e) {
 //			System.out.println("select 坷幅 " + e);
@@ -151,13 +163,21 @@ public class DAO {
 	public void selectJm(String ms) {
 		connect();
 		try {
+			String sql=null;
+			if(ms.length()==1) {
+				sql = "SELECT * FROM JAPANKANJI, KOREAKANJI, HANJA WHERE KOREAKANJI.NO = JAPANKANJI.NO AND KOREAKANJI.NO = HANJA.NO "
+						+"AND Jmean LIKE '"+ms+"'";
 
-			String sql = "SELECT * FROM KOREAKANJI, JAPANKANJI, HANJA WHERE KOREAKANJI.NO =JAPANKANJI.NO "
-					+ "AND KOREAKANJI.NO = HANJA.NO AND JAPANKANJI.Jmean ='" + ms + "'";
+			}else {
+				 sql = "SELECT * FROM JAPANKANJI, KOREAKANJI, HANJA WHERE KOREAKANJI.NO = JAPANKANJI.NO AND KOREAKANJI.NO = HANJA.NO "
+						+"AND Jmean LIKE '%"+ms+"%'";
+			}
+
+
 			pstmt = con.prepareStatement(sql);
-			System.out.println("pstmt : " + pstmt);
+//			System.out.println("pstmt : " + pstmt);
 			rs = pstmt.executeQuery();
-			System.out.println("rs : " + rs);
+//			System.out.println("rs : " + rs);
 
 			while (rs.next()) {
 				String Kmean = rs.getString("Kmean");
@@ -176,7 +196,7 @@ public class DAO {
 
 				Object data[] = { Jmean, Jsound, Kmean, Ksound, Hanja, no };
 				model.addRow(data);
-
+				
 			}
 		} catch (Exception e) {
 //			System.out.println("select 坷幅 " + e);

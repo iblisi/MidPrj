@@ -1,16 +1,16 @@
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-class Korea{
+class Korea {
 	String ks;
 	String km;
-	
+
 }
-class Japan{
+
+class Japan {
 	String js;
 	String jm;
 }
@@ -72,7 +72,7 @@ public class GDAO {
 	}
 
 	public Japan selectJ() {
-		Japan ja=new Japan();
+		Japan ja = new Japan();
 
 		try {
 			String sql = "SELECT * FROM JAPANKANJI WHERE JAPANKANJI.NO ='" + Random + "'";
@@ -91,9 +91,9 @@ public class GDAO {
 					Jmean = " ";
 				}
 
-				ja.js=Jsound;
-				ja.jm=Jmean;
-				System.out.println(Jmean + "\t" + Jsound);
+				ja.js = Jsound;
+				ja.jm = Jmean;
+//				System.out.println(Jmean + "\t" + Jsound);
 
 			}
 		} catch (Exception e) {
@@ -104,8 +104,8 @@ public class GDAO {
 	}
 
 	public Korea selectK() {
-		
-		Korea kr=new Korea();
+
+		Korea kr = new Korea();
 		try {
 			String sql = "SELECT * FROM  KOREAKANJI WHERE KOREAKANJI.NO  ='" + Random + "'";
 			pstmt = con.prepareStatement(sql);
@@ -116,11 +116,11 @@ public class GDAO {
 			while (rs.next()) {
 				String Ksound = rs.getString("Ksound");
 				String Kmean = rs.getString("Kmean");
-				
-				kr.ks=Ksound;
-				kr.km=Kmean;
-				
-				System.out.println(Kmean + "\t" + Ksound);
+
+				kr.ks = Ksound;
+				kr.km = Kmean;
+
+//				System.out.println(Kmean + "\t" + Ksound);
 
 			}
 		} catch (Exception e) {

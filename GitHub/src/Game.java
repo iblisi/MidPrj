@@ -1,5 +1,4 @@
 
-
 import java.awt.Dialog;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -24,7 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class Game extends JFrame {
+public class Game {
 	JFrame f2;
 	private JTextField problem, enser;
 	JComboBox<String> check, combo;
@@ -33,13 +32,13 @@ public class Game extends JFrame {
 	GDAO gda;
 	Dialog info;
 	boolean OX;
-	
+
 	private JLabel imageLabel;
 	private JTextField hintField;
 	Image img = new ImageIcon("C:\\Users\\inisu\\Desktop\\배경2.jpg").getImage();
 
 	public Game() {
-	
+
 		gda = new GDAO();
 
 		f2 = new JFrame("한자게임");
@@ -91,6 +90,7 @@ public class Game extends JFrame {
 		hintField.setOpaque(false);
 		hintField.setEditable(false);
 		hintField.setFont(new Font("", Font.PLAIN, 20));
+
 		JLabel bgi2 = new JLabel("") {
 			{
 				setOpaque(false);
@@ -144,31 +144,33 @@ public class Game extends JFrame {
 
 		enser.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
+			
+				if (enser.getText().equals("")) {
 
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					hintField.setText("");
 
 					if (check.getSelectedIndex() == 0) { // 한국어
 						if (gda.selectK().ks.contains(enser.getText())) {
-							System.out.println("정답입니다.");
+//							System.out.println("정답입니다.");
 							OX = true;
 							dialog();
 							startGame();
 
 						} else {
-							System.out.println("정답이 아닙니다. 다시 입력해 주세요.");
+//							System.out.println("정답이 아닙니다. 다시 입력해 주세요.");
 							OX = false;
 							dialog();
 							enser.setText("");
 						}
 					} else if (check.getSelectedIndex() == 1) {
 						if (gda.selectJ().js.contains(enser.getText())) {
-							System.out.println("정답입니다.");
+//							System.out.println("정답입니다.");
 							OX = true;
 							dialog();
 							startGame();
 						} else {
-							System.out.println("정답이 아닙니다. 다시 입력해 주세요.");
+//							System.out.println("정답이 아닙니다. 다시 입력해 주세요.");
 							OX = false;
 							dialog();
 							enser.setText("");
@@ -190,7 +192,7 @@ public class Game extends JFrame {
 		try {
 			m = ImageIO.read(file); // 이미지 파일을 읽어와서 BufferedImage 에 넣음
 			imageLabel.setIcon(new ImageIcon(m)); // 레이블에 이미지 표시
-			System.out.println("O그림 출력");
+//			System.out.println("O그림 출력");
 		} catch (Exception ex) {
 			ex.getStackTrace();
 		}
@@ -227,7 +229,7 @@ public class Game extends JFrame {
 	public void dialog() {
 		info = new Dialog(f2, "정답 확인", true);
 		info.setSize(300, 270);
-		info.setLocation(50, 50);
+		info.setLocation(1280, 270);
 		info.setLayout(null);
 
 		if (OX == true) {
@@ -252,9 +254,14 @@ public class Game extends JFrame {
 			}
 		});
 
+		ok.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				info.dispose();
+			}
+		});
+
 		info.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-//				System.out.println(e);
 				info.dispose();
 			}
 		});

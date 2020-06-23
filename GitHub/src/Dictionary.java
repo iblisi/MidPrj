@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -32,7 +33,8 @@ public class Dictionary {
 	private JTextField search, list, hanja;
 	JButton button;
 	Choice sel;
-
+	ButtonGroup BGC;
+	
 	private JTable table;
 	JLabel listname;
 	DefaultTableModel model;
@@ -68,7 +70,7 @@ public class Dictionary {
 		f.getContentPane().add(button);
 
 		search = new JTextField(" 검색 할 한자를 적어주세요");
-		search.setBounds(187, 71, 476, 33);
+		search.setBounds(142, 71, 590, 33);
 		f.getContentPane().add(search);
 		search.setColumns(10);
 		search.setOpaque(false);
@@ -87,19 +89,21 @@ public class Dictionary {
 		listname.setFont(new Font("", Font.BOLD, 20));
 //		listname.setForeground(Color.WHITE);
 		f.getContentPane().add(listname);
-
+		
+		BGC=new ButtonGroup();
 		kor = new JCheckBox(" 한국어", true);
 		kor.setBounds(694, 31, 65, 23);
 		f.getContentPane().add(kor);
 		kor.setOpaque(false);
-
 		jp = new JCheckBox(" 일본어");
 		jp.setBounds(772, 31, 97, 23);
 		f.getContentPane().add(jp);
 		jp.setOpaque(false);
-
+		BGC.add(kor);
+		BGC.add(jp);
+		
 		sel = new Choice();
-		sel.setBounds(39, 71, 97, 33);
+		sel.setBounds(39, 71, 97, 60);
 
 		sel.add(" 선  택 ");
 		sel.add(" 음  독 ");
