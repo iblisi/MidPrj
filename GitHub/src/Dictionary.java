@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.SwingConstants;
 
 // 검색결과 창에 나온 단어를 눌렀을 때 다시 그 검색화면이 나올 수 있도록
 // sql로더를 이용해서 데이터 베이스에 한자가 깨지지 않고 입력가능한지 확인
@@ -47,8 +48,10 @@ public class Dictionary {
 	
 
 	Image img = new ImageIcon("C:\\Users\\inisu\\Desktop\\배경2.jpg").getImage();
+	Image img3 = new ImageIcon("C:\\Users\\inisu\\Desktop\\구름.png").getImage();
 	private JLabel bgi;
 	private JButton Game;
+	private JLabel lblNewLabel;
 
 	public Dictionary() {
 
@@ -66,11 +69,11 @@ public class Dictionary {
 
 		button = new JButton("검색");
 		button.setSize(20, 40);
-		button.setBounds(734, 71, 76, 33);
+		button.setBounds(734, 87, 76, 33);
 		f.getContentPane().add(button);
 
 		search = new JTextField(" 검색 할 한자를 적어주세요");
-		search.setBounds(142, 71, 590, 33);
+		search.setBounds(145, 87, 590, 33);
 		f.getContentPane().add(search);
 		search.setColumns(10);
 		search.setOpaque(false);
@@ -92,18 +95,18 @@ public class Dictionary {
 		
 		BGC=new ButtonGroup();
 		kor = new JCheckBox(" 한국어", true);
-		kor.setBounds(694, 31, 65, 23);
+		kor.setBounds(675, 46, 65, 23);
 		f.getContentPane().add(kor);
 		kor.setOpaque(false);
 		jp = new JCheckBox(" 일본어");
-		jp.setBounds(772, 31, 97, 23);
+		jp.setBounds(746, 46, 76, 23);
 		f.getContentPane().add(jp);
 		jp.setOpaque(false);
 		BGC.add(kor);
 		BGC.add(jp);
 		
 		sel = new Choice();
-		sel.setBounds(39, 71, 97, 60);
+		sel.setBounds(39, 87, 97, 60);
 
 		sel.add(" 선  택 ");
 		sel.add(" 음  독 ");
@@ -147,11 +150,15 @@ public class Dictionary {
 		bgi.setBounds(0, 0, 869, 650);
 		f.getContentPane().add(bgi);
 
-		Game = new JButton("Game");
-		Game.setBounds(39, 31, 97, 23);
-		f.getContentPane().add(Game);
-
-		f.setVisible(true);
+		Game = new JButton(new ImageIcon("C:\\Users\\inisu\\Desktop\\구름2.png"));
+		Game.setToolTipText("");
+		Game.setBounds(10, 10, 150, 70);
+		Game.setBorderPainted(false);
+		Game.setContentAreaFilled(false);
+		Game.setFocusPainted(false);
+		bgi.add(Game);
+		
+		
 
 		Game.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -194,7 +201,7 @@ public class Dictionary {
 				}
 			}
 		});
-
+		f.setVisible(true);
 	}
 
 	public void getHanja() {
